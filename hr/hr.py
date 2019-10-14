@@ -26,12 +26,19 @@ def start_module():
         None
     """
     options=["show table","add", "remove","Update","Get oldest person","get person closest to average"]
-    ui.print_menu("Human resources",options,"Main menu")
-    inputs=ui.get_inputs("Please enter a number:","")
-    option = inputs[0]
-    if option=="1":
-        show_table(data_manager.get_table_from_file("persons.csv"))
-
+    table = data_manager.get_table_from_file("hr/persons.csv")
+    while True:
+        ui.print_menu("Human resources",options,"Main menu")
+        inputs=ui.get_inputs("Please enter a number:","")
+        option = inputs[0]
+        if option=="1":
+            show_table(table)
+        elif option=="2":
+            table = add(table)
+            #data_manager.write_table_to_file(table, "hr/persons.csv")
+        
+        elif option=="0":
+            break
     
 
     # your code
@@ -51,6 +58,7 @@ def show_table(table):
     # your code
     headers=["id","name","birth_year"]
     ui.print_table(table,headers)
+    ui.get_inputs("Press a button to advance!","")
 
 
 def add(table):
@@ -64,8 +72,12 @@ def add(table):
         list: Table with a new record
     """
 
-    # your code
 
+    # your code
+    table.append([])
+    table[-1].append(common.generate_random(table))
+    table[-1].append(ui.get_inputs("Type in the name",""))
+    table[-1].append(ui.get_inputs("Type in the birth year",""))
     return table
 
 
@@ -82,7 +94,7 @@ def remove(table, id_):
     """
 
     # your code
-
+    
     return table
 
 
