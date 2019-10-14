@@ -18,8 +18,40 @@ def generate_random(table):
         string: Random and unique string
     """
 
-    generated = ''
 
     # your code
+    char = [
+            ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"],
+            ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"],
+            [1,2,3,4,5,6,7,8,9,0],
+            ["+","#","!","%","/","=","(",")","?",".","-","_","@",],
+            ]
+    l = []
 
-    return generated
+    # j H 3 4 J u # &  <---  ID example for myself
+    while True:
+        special_one = random.randint(0, 11)
+        special_two = random.randint(0, 11)
+
+        lower_one = random.randint(0,25)
+        lower_two = random.randint(0,25)
+
+        upper_one = random.randint(0,25)
+        upper_two = random.randint(0,25)
+
+        number_one = random.randint(0,9)
+        number_two = random.randint(0, 9)
+
+        l.append(char[0][lower_one])
+        l.append(char[1][upper_one])
+        l.append(str(char[2][number_one]))
+        l.append(str(char[2][number_two]))
+        l.append(char[1][upper_two])
+        l.append(char[0][lower_two])
+        l.append(char[3][special_one])
+        l.append(char[3][special_two])
+        generated = "".join(l)
+        if generated in table:
+            continue
+        else:
+            return generated
