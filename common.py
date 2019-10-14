@@ -54,9 +54,19 @@ def generate_random(table):
             continue
         else:
             return generated
+        
+        
 def sum_of_list(list):
-    ''' takes a list as a parameter and return the sum of the list '''
+    ''' takes a list as a parameter and return the sum of it'''
     result = 0
     for elem in list:
         result +=elem
     return result
+
+
+def avg_of_list(list):
+    ''' takes a list as a parameter and return the avg of it'''
+    num = 0
+    for element in list:
+        num += element
+    return num/len(list)
