@@ -25,6 +25,14 @@ def start_module():
     Returns:
         None
     """
+    options=["show table","add", "remove","Update","Get oldest person","get person closest to average"]
+    ui.print_menu("Human resources",options,"Main menu")
+    inputs=ui.get_inputs("Please enter a number:","")
+    option = inputs[0]
+    if option=="1":
+        show_table(data_manager.get_table_from_file("persons.csv"))
+
+    
 
     # your code
 
@@ -41,6 +49,8 @@ def show_table(table):
     """
 
     # your code
+    headers=["id","name","birth_year"]
+    ui.print_table(table,headers)
 
 
 def add(table):
@@ -122,3 +132,4 @@ def get_persons_closest_to_average(table):
     """
 
     # your code
+
