@@ -62,8 +62,12 @@ def print_menu(title, list_options, exit_message):
     """
     
     # your code
-    print(title+":\n\t(1)" +list_options[0]+ "\n\t(2)" +list_options[1]+ "\n\t(3)"+list_options[2]+
-          "\n\t(4)" +list_options[3]+ "\n\t(5)" +list_options[4]+ "\n\t(6)" +list_options[5]+ "\n\t(0)" +exit_message)
+    print(title+":")
+    counter = 0
+    for option in list_options:
+        counter += 1
+        print("\t" + "(" +str(counter)+ ") " + option)
+    print("\t(0) "+exit_message)
 
 
 def get_inputs(list_labels, title):
