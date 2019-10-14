@@ -4,7 +4,6 @@ implement commonly used functions here
 
 import random
 
-
 def generate_random(table):
     """
     Generates random and unique string. Used for id/key generation:
@@ -55,3 +54,9 @@ def generate_random(table):
             continue
         else:
             return generated
+def sum_of_list(list):
+    ''' takes a list as a parameter and return the sum of the list '''
+    result = 0
+    for elem in list:
+        result +=elem
+    return result
