@@ -1,5 +1,5 @@
 """ User Interface (UI) module """
-
+import data_manager
 
 def print_table(table, title_list):
     """
@@ -23,6 +23,29 @@ def print_table(table, title_list):
     """
 
     # your goes code
+    temp=1
+    for word in title_list:
+        if temp==len(title_list):
+            print("|{0:^20}".format(word), end="|\n")
+        else:
+            print("|{0:^20}".format(word), end="")
+        temp+=1
+    print("-"*64)
+    for row in table:
+        temp=1
+        for item in row:
+            if temp==len(row):
+                print("|{0:^20}".format(item), end="|\n")
+            else:
+                print("|{0:^20}".format(item) ,end="")
+            
+            
+
+            temp+=1
+
+    
+
+
 
 
 def print_result(result, label):
@@ -36,7 +59,8 @@ def print_result(result, label):
     Returns:
         None: This function doesn't return anything it only prints to console.
     """
-
+    print(result)
+    print(label)
     # your code
 
 
@@ -60,7 +84,7 @@ def print_menu(title, list_options, exit_message):
     Returns:
         None: This function doesn't return anything it only prints to console.
     """
-    
+
     # your code
     print(title+":")
     counter = 0
@@ -89,25 +113,13 @@ def get_inputs(list_labels, title):
         list: List of data given by the user. Sample return:
             [<user_input_1>, <user_input_2>, <user_input_3>]
     """
-   
-   # your code
     inputs = []
 
-    print("Please provide your personal information:")
-    while True:
-        try:
-            firstname = input("First name: ")
-            lastname = input("Last name: ")
-            age = int(input("Your age: "))
-            inputs.append(firstname)
-            inputs.append(lastname)
-            inputs.append(str(age))
-            return inputs
-        except ValueError:
-            print("Ops! Something went wrong.\nError: Wrong input in the following: Your age\nPlease try again.")
-            continue
+    # your code
+    inputs=input("".join(list_labels))
 
-  
+
+    return inputs
 
 
 def print_error_message(message):
@@ -121,5 +133,5 @@ def print_error_message(message):
         None: This function doesn't return anything it only prints to console.
     """
 
-   # your code
+    # your code
     print("Ops! An error occurred!\n Error: "+message)
