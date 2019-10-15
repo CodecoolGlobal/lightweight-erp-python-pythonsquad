@@ -49,7 +49,15 @@ def start_module():
         elif option == "5":
             ui.print_result("The ID is: " + str(get_lowest_price_item_id(table)), "")
         elif option == "6":
-            pass
+            frommonth = ui.get_inputs("Enter the first month you want to update: ", "")
+            fromday = ui.get_inputs("Enter the first day you want to update: ", "")
+            fromyear = ui.get_inputs("Enter the first year you want to update: ", "")
+
+            tomonth = ui.get_inputs("Enter the second month you want to update: ", "")
+            today = ui.get_inputs("Enter the second day you want to update: ", "")
+            toyear = ui.get_inputs("Enter the second year you want to update: ", "")
+
+            ui.print_result(str(get_items_sold_between(table,frommonth,fromday,fromyear,tomonth,today,toyear)), "")
         elif option == "0":
             break
 
@@ -190,3 +198,26 @@ def get_items_sold_between(table, month_from, day_from, year_from, month_to, day
     """
 
     # your code
+
+    # vH34Ju#&:ID-0   AudioSurf:Title-1  23:Price-2   6:Month-3   2:Day-4   2016:Year-5
+
+    result=[]
+    day_from = int(day_from)
+    month_from = int(month_from) * 30
+    year_from = int(year_from) * 365
+    result_from = day_from + month_from + year_from
+    day_to = int(day_to)
+    month_to = int(month_to) * 30
+    year_to = int(year_to) * 365
+    result_to = day_to + month_to + year_to
+    for sublist in table:
+
+        x = int(sublist[4])+(int(sublist[3])*30)+(int(sublist[5])*365)
+        if x >= int(result_from) and x <= int(result_to):
+            result.append(sublist[1])
+    return result
+
+
+
+
+
