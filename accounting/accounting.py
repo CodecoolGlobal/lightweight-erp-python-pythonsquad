@@ -29,7 +29,34 @@ def start_module():
         None
     """
 
-    # you code
+    # your code
+    options = ["Show table","Add","Remove","Update","Year of hightest profit","Average per item profit in a year"]
+    table = data_manager.get_table_from_file("accounting/items.csv")
+    while True:
+        ui.print_menu("Accounting",options,"Back to Main menu")
+        inputs = ui.get_inputs("Please enter a number: ","")
+        option = inputs[0]
+        if option == "1":
+            show_table(table)
+        elif option == "2":
+            table = add(table)
+        elif option =="3":
+            userinput = ui.get_inputs("Enter the ID you want to remove: ", "")
+            remove(table,userinput)
+        elif option == "4":
+            userinput_id = ui.get_inputs("Enter the ID you want to update: ", "")
+            update(table,userinput_id)
+        elif option == "5":
+            which_year_max(table)
+        elif option == "6":
+            userinput_year = ui.get_inputs("Enter the year: ", "")
+            ui.print_result("The average is: "+str(avg_amount(table,userinput_year)),"")
+        else:
+            break
+
+
+
+
 
 
 def show_table(table):
@@ -44,7 +71,9 @@ def show_table(table):
     """
 
     # your code
-
+    headers =["ID","Month","Day","Year","Type","Amount"]
+    ui.print_table(table,headers)
+    ui.get_inputs("Press Enter to to advance!","")
 
 def add(table):
     """
@@ -58,6 +87,16 @@ def add(table):
     """
 
     # your code
+    table.append([])
+    table[-1].append(common.generate_random(table))
+    table[-1].append(ui.get_inputs("Type in the month(with number): ", ""))
+    table[-1].append(ui.get_inputs("Type in the day: ", ""))
+    table[-1].append(ui.get_inputs("Type in the year: ", ""))
+    table[-1].append(ui.get_inputs("Type in the type"
+                                   "([in] for income or [out] for outflow): ", ""))
+
+    table[-1].append(ui.get_inputs("Type in the amount: ", ""))
+
 
     return table
 
@@ -75,7 +114,11 @@ def remove(table, id_):
     """
 
     # your code
-
+    for sublist in table:
+        if id_ in sublist:
+            table.remove(sublist)
+    data_manager.write_table_to_file("accounting/items.csv",table)
+    ui.get_inputs("Press Enter to to advance!", "")
     return table
 
 
@@ -92,6 +135,20 @@ def update(table, id_):
     """
 
     # your code
+    userinput_month = ui.get_inputs("Month: ","")
+    userinput_day = ui.get_inputs("Day: ", "")
+    userinput_year = ui.get_inputs("Year: ", "")
+    userinput_type = ui.get_inputs("Type: ", "")
+    userinput_amount = ui.get_inputs("Amount: ", "")
+    for sublist in table:
+        if id_ in sublist:
+            sublist[0] = common.generate_random(table)
+            sublist[1] = userinput_month
+            sublist[2] = userinput_day
+            sublist[3] = userinput_year
+            sublist[4] = userinput_type
+            sublist[5] = userinput_amount
+    data_manager.write_table_to_file("accounting/items.csv", table)
 
     return table
 
@@ -111,6 +168,9 @@ def which_year_max(table):
     """
 
     # your code
+    dic = {}
+    for sublist in table:
+        if sublist[4] not in dic:
 
 
 def avg_amount(table, year):
@@ -126,3 +186,9 @@ def avg_amount(table, year):
     """
 
     # your code
+    listofitems = []
+    for sublist in table:
+        if sublist[3] == year:
+            listofitems.append(int(sublist[5]))
+    return common.avg_of_list(listofitems)
+
