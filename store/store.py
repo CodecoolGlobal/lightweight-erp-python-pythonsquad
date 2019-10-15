@@ -30,7 +30,7 @@ def start_module():
 
     # your code
     options = ["Show table", "Add", "Remove", "Update", "Type of games", "Average of games in stock"]
-    table = data_manager.get_table_from_file("sales/sales.csv")
+    table = data_manager.get_table_from_file("store/games.csv")
     while True:
         ui.print_menu("Store", options, "Back to Main menu")
         inputs = ui.get_inputs("Please enter a number: ", "")
@@ -48,7 +48,8 @@ def start_module():
         elif option == "5":
             pass
         elif option == "6":
-            pass
+            userinput_id = ui.get_inputs("Enter the Manufacturer: ", "")
+            ui.print_result("The average is: " + str(get_average_by_manufacturer(table, userinput_id)), "")
         elif option == "0":
             break
 
@@ -168,3 +169,11 @@ def get_average_by_manufacturer(table, manufacturer):
     """
 
     # your code
+    counter = 0
+    listofstock=[]
+    for sublist in table:
+        if sublist[2] == manufacturer:
+            listofstock.append(int(sublist[4]))
+    result = common.avg_of_list(listofstock)
+    return result
+
