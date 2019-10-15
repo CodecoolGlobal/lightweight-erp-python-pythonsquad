@@ -29,7 +29,28 @@ def start_module():
     """
 
     # your code
-
+    options = ["Show table", "Add", "Remove", "Update", "Type of games", "Average of games in stock"]
+    table = data_manager.get_table_from_file("sales/sales.csv")
+    while True:
+        ui.print_menu("Store", options, "Back to Main menu")
+        inputs = ui.get_inputs("Please enter a number: ", "")
+        option = inputs[0]
+        if option == "1":
+            show_table(table)
+        elif option == "2":
+            table = add(table)
+        elif option == "3":
+            userinput = ui.get_inputs("Enter the ID you want to remove: ", "")
+            table = remove(table, userinput)
+        elif option == "4":
+            userinput_id = ui.get_inputs("Enter the ID you want to update: ", "")
+            table = update(table, userinput_id)
+        elif option == "5":
+            pass
+        elif option == "6":
+            pass
+        elif option == "0":
+            break
 
 def show_table(table):
     """
@@ -43,7 +64,9 @@ def show_table(table):
     """
 
     # your code
-
+    headers = ["ID", "Title", "Manufacturer", "Price", "InStock",]
+    ui.print_table(table, headers)
+    ui.get_inputs("Press Enter to to advance!", "")
 
 def add(table):
     """
@@ -57,8 +80,14 @@ def add(table):
     """
 
     # your code
-
+    table.append([])
+    table[-1].append(common.generate_random(table))
+    table[-1].append(ui.get_inputs("Type in the Title ", ""))
+    table[-1].append(ui.get_inputs("Type in the Manufacturer: ", ""))
+    table[-1].append(ui.get_inputs("Type in the Price: ", ""))
+    table[-1].append(ui.get_inputs("Type in the InStock: ", ""))
     return table
+
 
 
 def remove(table, id_):
@@ -74,8 +103,12 @@ def remove(table, id_):
     """
 
     # your code
-
+    for sublist in table:
+        if id_ in sublist:
+            table.remove(sublist)
+    ui.get_inputs("Press Enter to to advance!", "")
     return table
+
 
 
 def update(table, id_):
@@ -91,7 +124,17 @@ def update(table, id_):
     """
 
     # your code
-
+    userinput_title = ui.get_inputs("Title: ", "")
+    userinput_man = ui.get_inputs("Manufacturer: ", "")
+    userinput_price = ui.get_inputs("Price: ", "")
+    userinput_stock = ui.get_inputs("In Stock: ", "")
+    for sublist in table:
+        if id_ in sublist:
+            sublist[0] = common.generate_random(table)
+            sublist[1] = userinput_title
+            sublist[2] = userinput_man
+            sublist[3] = userinput_price
+            sublist[4] = userinput_stock
     return table
 
 
