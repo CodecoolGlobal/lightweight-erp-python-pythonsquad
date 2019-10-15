@@ -47,7 +47,7 @@ def start_module():
             userinput_id = ui.get_inputs("Enter the ID you want to update: ", "")
             table = update(table, userinput_id)
         elif option == "5":
-            pass
+            ui.print_result("The ID is: " + str(get_lowest_price_item_id(table)), "")
         elif option == "6":
             pass
         elif option == "0":
@@ -157,6 +157,19 @@ def get_lowest_price_item_id(table):
     """
 
     # your code
+    listofprices=[]
+    result =[]
+    for sublist in table:
+        listofprices.append(int(sublist[2]))
+
+    min=999999999999999999
+    for number in listofprices:
+        if min > number:
+            min = number
+
+    for sublist in table:
+        if str(min) == sublist[2]:
+            return sublist[0]
 
 
 def get_items_sold_between(table, month_from, day_from, year_from, month_to, day_to, year_to):
