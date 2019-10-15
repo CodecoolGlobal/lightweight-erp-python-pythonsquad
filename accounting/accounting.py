@@ -42,10 +42,10 @@ def start_module():
             table = add(table)
         elif option =="3":
             userinput = ui.get_inputs("Enter the ID you want to remove: ", "")
-            remove(table,userinput)
+            table = remove(table,userinput)
         elif option == "4":
             userinput_id = ui.get_inputs("Enter the ID you want to update: ", "")
-            update(table,userinput_id)
+            table = update(table,userinput_id)
         elif option == "5":
             which_year_max(table)
         elif option == "6":
@@ -117,7 +117,6 @@ def remove(table, id_):
     for sublist in table:
         if id_ in sublist:
             table.remove(sublist)
-    data_manager.write_table_to_file("accounting/items.csv",table)
     ui.get_inputs("Press Enter to to advance!", "")
     return table
 
@@ -148,7 +147,7 @@ def update(table, id_):
             sublist[3] = userinput_year
             sublist[4] = userinput_type
             sublist[5] = userinput_amount
-    data_manager.write_table_to_file("accounting/items.csv", table)
+
 
     return table
 
