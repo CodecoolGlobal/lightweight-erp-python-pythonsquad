@@ -46,7 +46,7 @@ def start_module():
             userinput_id = ui.get_inputs("Enter the ID you want to update: ", "")
             table = update(table, userinput_id)
         elif option == "5":
-            pass
+            get_counts_by_manufacturers(table)
         elif option == "6":
             userinput_id = ui.get_inputs("Enter the Manufacturer: ", "")
             ui.print_result("The average is: " + str(get_average_by_manufacturer(table, userinput_id)), "")
@@ -154,7 +154,13 @@ def get_counts_by_manufacturers(table):
     """
 
     # your code
-
+    dic = {}
+    for sublist in table:
+        if sublist[2] not in dic:
+            dic.update({sublist[2]:1})
+        elif sublist[2] in dic:
+            dic[sublist[2]] += 1
+    return dic
 
 def get_average_by_manufacturer(table, manufacturer):
     """
