@@ -51,7 +51,7 @@ def start_module():
         elif option == "6":
             userinput_year = ui.get_inputs("Enter the year: ", "")
             ui.print_result("The average is: "+str(avg_amount(table,userinput_year)),"")
-        else:
+        elif option == "0":
             break
 
 
