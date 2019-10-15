@@ -70,3 +70,9 @@ def avg_of_list(list):
     for element in list:
         num += element
     return num/len(list)
+
+
+
+
+
+
