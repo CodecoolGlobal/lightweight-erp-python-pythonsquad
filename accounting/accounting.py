@@ -168,11 +168,27 @@ def which_year_max(table):
     """
 
     # your code
-    dic = {}
-    listofyears_in=[]
-    listofyears_out =[]
+    dictionary={}
+    year_max=0
+    highest_profit=0
+    for i in range(len(table)):
+        if table[i][3] not in dictionary.keys():
+            if table[i][4]=="in":
+                dictionary.update({table[i][3]:int(table[i][5])})
+            if table[i][4]=="out":
+                dictionary.update({table[i][3]:(int(table[i][5])-(2*int(table[i][5])))})
+        elif table[i][3] in dictionary.keys():
+            if table[i][4]=="in":
+                dictionary[table[i][3]]+=int(table[i][5])
+            if table[i][4]=="out":
+                dictionary[table[i][3]]-=int(table[i][5])
+    for key,value in dictionary.items():
+        if value>highest_profit:
+            year_max=key
+        
+    return year_max
 
-    pass
+    
 
 
 
