@@ -18,8 +18,8 @@ import data_manager
 # common module
 import common
 
-
 def start_module():
+
     """
     Starts this module and displays its menu.
      * User can access default special features from here.
@@ -30,7 +30,28 @@ def start_module():
     """
 
     # your code
-
+    options = ["Show table", "Add", "Remove", "Update", "Lowest price ID", "Sold between two given dates"]
+    table = data_manager.get_table_from_file("sales/sales.csv")
+    while True:
+        ui.print_menu("Sales", options, "Back to Main menu")
+        inputs = ui.get_inputs("Please enter a number: ", "")
+        option = inputs[0]
+        if option == "1":
+            show_table(table)
+        elif option == "2":
+            table = add(table)
+        elif option == "3":
+            userinput = ui.get_inputs("Enter the ID you want to remove: ", "")
+            table = remove(table, userinput)
+        elif option == "4":
+            userinput_id = ui.get_inputs("Enter the ID you want to update: ", "")
+            table = update(table, userinput_id)
+        elif option == "5":
+            pass
+        elif option == "6":
+            pass
+        elif option == "0":
+            break
 
 def show_table(table):
     """
@@ -44,7 +65,9 @@ def show_table(table):
     """
 
     # your code
-
+    headers = ["ID", "Title", "Price", "Month", "Day", "Year"]
+    ui.print_table(table, headers)
+    ui.get_inputs("Press Enter to to advance!", "")
 
 def add(table):
     """
@@ -58,7 +81,13 @@ def add(table):
     """
 
     # your code
-
+    table.append([])
+    table[-1].append(common.generate_random(table))
+    table[-1].append(ui.get_inputs("Type in the Title ", ""))
+    table[-1].append(ui.get_inputs("Type in the Price: ", ""))
+    table[-1].append(ui.get_inputs("Type in the Month: ", ""))
+    table[-1].append(ui.get_inputs("Type in the Day: ", ""))
+    table[-1].append(ui.get_inputs("Type in the Year: ", ""))
     return table
 
 
@@ -75,8 +104,12 @@ def remove(table, id_):
     """
 
     # your code
-
+    for sublist in table:
+        if id_ in sublist:
+            table.remove(sublist)
+    ui.get_inputs("Press Enter to to advance!", "")
     return table
+
 
 
 def update(table, id_):
@@ -92,7 +125,19 @@ def update(table, id_):
     """
 
     # your code
-
+    userinput_title = ui.get_inputs("Title: ", "")
+    userinput_price = ui.get_inputs("Price: ", "")
+    userinput_month = ui.get_inputs("Month: ", "")
+    userinput_day = ui.get_inputs("Day: ", "")
+    userinput_year = ui.get_inputs("Year: ", "")
+    for sublist in table:
+        if id_ in sublist:
+            sublist[0] = common.generate_random(table)
+            sublist[1] = userinput_title
+            sublist[2] = userinput_price
+            sublist[3] = userinput_month
+            sublist[4] = userinput_day
+            sublist[5] = userinput_year
     return table
 
 
