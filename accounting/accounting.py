@@ -169,8 +169,14 @@ def which_year_max(table):
 
     # your code
     dic = {}
-    for sublist in table:
-        if sublist[4] not in dic:
+    listofyears_in=[]
+    listofyears_out =[]
+
+    pass
+
+
+
+
 
 
 def avg_amount(table, year):
@@ -187,8 +193,29 @@ def avg_amount(table, year):
 
     # your code
     listofitems = []
+
+    dic_in={}
+    dic_out={}
+    counter_in = 1
+    counter_out = 1
     for sublist in table:
-        if sublist[3] == year:
-            listofitems.append(int(sublist[5]))
-    return common.avg_of_list(listofitems)
+        if sublist[3] == year and sublist[4] == "in":
+            counter_in += 1
+            dic_in.update({counter_in:sublist[5]})
+
+        elif sublist[3] == year and sublist[4] == "out":
+            counter_out += 1
+            dic_out.update({counter_out:sublist[5]})
+
+
+    for plusz in dic_in.keys():
+        for minusz in dic_out.values():
+            result = (int(plusz) - int(minusz))
+            listofitems.append(result)
+
+    num = 0
+    for items in listofitems:
+        num += items
+    result_new = num / len(dic_in.keys())
+    return result_new
 
