@@ -46,9 +46,9 @@ def start_module():
             userinput_id = ui.get_inputs("Enter the ID you want to update: ", "")
             update(table,userinput_id)
         elif option=="5":
-            get_longest_name_id(table)
+            ui.print_result(get_longest_name_id(table),"")
         elif option=="6":
-            get_subscribed_emails(table)
+            ui.print_result(get_subscribed_emails(table),"")
         elif option=="0":
             break
 
@@ -171,7 +171,6 @@ def get_longest_name_id(table):
         elif value>longest_name:
             longest_name=value
             longest_id=key
-    ui.print_result("The id of the person with the longest name: {0}".format(longest_id),"")
     ui.get_inputs("Press Enter to to advance!", "")
     return longest_id
 
@@ -191,11 +190,13 @@ def get_subscribed_emails(table):
 
     # your code
     subscribed_str=""
+    subscribed_list=[]
     for i in range(len(table)):
-        if table[i][3]=="1" and i!=len(table):
-            subscribed_str=subscribed_str+table[i][2]+";"+table[i][1]+", "
-        elif table[i][3]=="1" and i==len(table):
+        if table[i][3]=="1" and i!=(len(table)-1):
+            subscribed_str=subscribed_str+table[i][2]+";"+table[i][1]+","
+        elif table[i][3]=="1" and i==(len(table)-1):
             subscribed_str=subscribed_str+table[i][2]+";"+table[i][1]
-    ui.print_result("The subscribed name;email list:\n{0}".format(subscribed_str),"")
+    subscribed_list=subscribed_str.split(",")
+    subscribed_list.remove('')
     ui.get_inputs("Press Enter to to advance!", "")
-    return subscribed_str
+    return subscribed_list
