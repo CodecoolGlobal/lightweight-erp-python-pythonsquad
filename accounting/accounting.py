@@ -200,7 +200,7 @@ def which_year_max(table):
         if value>highest_profit:
             year_max=key
         
-    return year_max
+    return int(year_max)
 
     
 
