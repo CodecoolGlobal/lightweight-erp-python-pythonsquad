@@ -28,6 +28,29 @@ def start_module():
     """
 
     # your code
+    options=["show table","add", "remove","Update","Get the id connected to the longest name","Get subscribed customers"]
+    table = data_manager.get_table_from_file("crm/customers.csv")
+    while True:
+        ui.print_menu("Customer Relationship Management",options,"Main menu")
+        inputs=ui.get_inputs("Please enter a number:","")
+        option = inputs[0]
+        if option=="1":
+            show_table(table)
+        elif option=="2":
+            table = add(table)
+            #data_manager.write_table_to_file(table, "hr/persons.csv")
+        elif option=="3":
+            userinput = ui.get_inputs("Enter the ID you want to remove: ", "")
+            table =remove(table,userinput)
+        elif option=="4":
+            userinput_id = ui.get_inputs("Enter the ID you want to update: ", "")
+            update(table,userinput_id)
+        elif option=="5":
+            get_longest_name_id(table)
+        elif option=="6":
+            get_subscribed_emails(table)
+        elif option=="0":
+            break
 
 
 def show_table(table):
@@ -42,6 +65,9 @@ def show_table(table):
     """
 
     # your code
+    headers=["id","name","email","subscribed"]
+    ui.print_table(table,headers)
+    ui.get_inputs("Press a button to advance!","")
 
 
 def add(table):
@@ -56,7 +82,12 @@ def add(table):
     """
 
     # your code
-
+    table.append([])
+    table[-1].append(common.generate_random(table))
+    table[-1].append(ui.get_inputs("Type in the name: ",""))
+    table[-1].append(ui.get_inputs("Type in the email address: ",""))
+    table[-1].append(ui.get_inputs("Is he/she subscribed?(0/1): ",""))
+    
     return table
 
 
@@ -73,7 +104,10 @@ def remove(table, id_):
     """
 
     # your code
-
+    for sublist in table:
+        if id_ in sublist:
+            table.remove(sublist)
+    ui.get_inputs("Press Enter to to advance!", "")
     return table
 
 
@@ -90,6 +124,15 @@ def update(table, id_):
     """
 
     # your code
+    userinput_name = ui.get_inputs("Name: ","")
+    userinput_email = ui.get_inputs("Email:  ","")
+    userinput_subbed = ui.get_inputs("Subscribed? (0/1): ","")
+    for sublist in table:
+        if id_ in sublist:
+            sublist[0] = common.generate_random(table)
+            sublist[1] = userinput_name
+            sublist[2] = userinput_email
+            sublist[3] = userinput_subbed
 
     return table
 
@@ -110,6 +153,27 @@ def get_longest_name_id(table):
         """
 
     # your code
+    Longest_id=""
+    longest_length=0
+    dictionary={}
+    for i in range(len(table)):
+        if len(table[i][1])>longest_length:
+            longest_length=len(table[i][1])
+    for j in range(len(table)):
+        if len(table[j][1])==longest_length:
+            dictionary.update({table[j][0]:table[j][1]})
+    longest_name=""
+    temp=0
+    for key,value in dictionary.items():
+        if temp==0:
+            longest_name=value
+            temp+=1
+        elif value>longest_name:
+            longest_name=value
+            longest_id=key
+    ui.print_result("The id of the person with the longest name: {0}".format(longest_id),"")
+    ui.get_inputs("Press Enter to to advance!", "")
+    return longest_id
 
 
 # the question: Which customers has subscribed to the newsletter?
@@ -126,3 +190,12 @@ def get_subscribed_emails(table):
         """
 
     # your code
+    subscribed_str=""
+    for i in range(len(table)):
+        if table[i][3]=="1" and i!=len(table):
+            subscribed_str=subscribed_str+table[i][2]+";"+table[i][1]+", "
+        elif table[i][3]=="1" and i==len(table):
+            subscribed_str=subscribed_str+table[i][2]+";"+table[i][1]
+    ui.print_result("The subscribed name;email list:\n{0}".format(subscribed_str),"")
+    ui.get_inputs("Press Enter to to advance!", "")
+    return subscribed_str
