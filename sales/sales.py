@@ -138,14 +138,24 @@ def update(table, id_):
     userinput_month = ui.get_inputs("Month: ", "")
     userinput_day = ui.get_inputs("Day: ", "")
     userinput_year = ui.get_inputs("Year: ", "")
+      
+    ID=0
+    TITLE=1
+    PRICE=2
+    MONTH=3
+    DAY=4
+    YEAR=5
+      
+      
+     
     for sublist in table:
         if id_ in sublist:
-            sublist[0] = common.generate_random(table)
-            sublist[1] = userinput_title
-            sublist[2] = userinput_price
-            sublist[3] = userinput_month
-            sublist[4] = userinput_day
-            sublist[5] = userinput_year
+            sublist[ID] = common.generate_random(table)
+            sublist[TITLE] = userinput_title
+            sublist[PRICE] = userinput_price
+            sublist[MONTH] = userinput_month
+            sublist[DAY] = userinput_day
+            sublist[YEAR] = userinput_year
     return table
 
 
@@ -163,12 +173,13 @@ def get_lowest_price_item_id(table):
     Returns:
          string: id
     """
-
+    ID=0
+    PRICE=2
     # your code
     listofprices=[]
     result =[]
     for sublist in table:
-        listofprices.append(int(sublist[2]))
+        listofprices.append(int(sublist[PRICE]))
 
     min=999999999999999999
     for number in listofprices:
@@ -176,8 +187,8 @@ def get_lowest_price_item_id(table):
             min = number
 
     for sublist in table:
-        if str(min) == sublist[2]:
-            return sublist[0]
+        if str(min) == sublist[PRICE]:
+            return sublist[ID]
 
 
 def get_items_sold_between(table, month_from, day_from, year_from, month_to, day_to, year_to):
@@ -200,6 +211,13 @@ def get_items_sold_between(table, month_from, day_from, year_from, month_to, day
     # your code
 
     # vH34Ju#&:ID-0   AudioSurf:Title-1  23:Price-2   6:Month-3   2:Day-4   2016:Year-5
+      
+    ID=0
+    TITLE=1
+    PRICE=2
+    MONTH=3
+    DAY=4
+    YEAR=5
 
     result=[]
     day_from = int(day_from)
@@ -212,9 +230,9 @@ def get_items_sold_between(table, month_from, day_from, year_from, month_to, day
     result_to = day_to + month_to + year_to
     for sublist in table:
 
-        x = int(sublist[4])+(int(sublist[3])*30)+(int(sublist[5])*365)
+        x = int(sublist[DAY])+(int(sublist[MONTH])*30)+(int(sublist[YEAR])*365)
         if x >= int(result_from) and x <= int(result_to):
-            result.append(sublist[1])
+            result.append(sublist[TITLE])
     return result
 
 
