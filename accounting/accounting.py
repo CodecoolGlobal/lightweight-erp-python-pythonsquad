@@ -139,14 +139,24 @@ def update(table, id_):
     userinput_year = ui.get_inputs("Year: ", "")
     userinput_type = ui.get_inputs("Type: ", "")
     userinput_amount = ui.get_inputs("Amount: ", "")
+    ID = 0
+    Month=1
+    Day=2
+    Year=3
+    Type=4
+    Amount=5
+      
+      
+      
+      
     for sublist in table:
         if id_ in sublist:
-            sublist[0] = common.generate_random(table)
-            sublist[1] = userinput_month
-            sublist[2] = userinput_day
-            sublist[3] = userinput_year
-            sublist[4] = userinput_type
-            sublist[5] = userinput_amount
+            sublist[ID] = common.generate_random(table)
+            sublist[Month] = userinput_month
+            sublist[Day] = userinput_day
+            sublist[Year] = userinput_year
+            sublist[Type] = userinput_type
+            sublist[Amount] = userinput_amount
 
 
     return table
@@ -170,17 +180,22 @@ def which_year_max(table):
     dictionary={}
     year_max=0
     highest_profit=0
+    Year=3
+    InorOut=4
+    Amount=5
+      
+      
     for i in range(len(table)):
-        if table[i][3] not in dictionary.keys():
-            if table[i][4]=="in":
-                dictionary.update({table[i][3]:int(table[i][5])})
-            if table[i][4]=="out":
-                dictionary.update({table[i][3]:(int(table[i][5])-(2*int(table[i][5])))})
-        elif table[i][3] in dictionary.keys():
-            if table[i][4]=="in":
-                dictionary[table[i][3]]+=int(table[i][5])
-            if table[i][4]=="out":
-                dictionary[table[i][3]]-=int(table[i][5])
+        if table[i][Year] not in dictionary.keys():
+            if table[i][InorOut]=="in":
+                dictionary.update({table[i][Year]:int(table[i][Amount])})
+            if table[i][InorOut]=="out":
+                dictionary.update({table[i][Year]:(int(table[i][Amount])-(2*int(table[i][Amount])))})
+        elif table[i][Year] in dictionary.keys():
+            if table[i][InorOut]=="in":
+                dictionary[table[i][Year]]+=int(table[i][Amount])
+            if table[i][InorOut]=="out":
+                dictionary[table[i][Year]]-=int(table[i][Amount])
     for key,value in dictionary.items():
         if value>highest_profit:
             year_max=key
@@ -213,14 +228,17 @@ def avg_amount(table, year):
     dic_out={}
     counter_in = 1
     counter_out = 1
+    Year=3
+    InorOut=4
+    Amount=5
     for sublist in table:
-        if sublist[3] == year and sublist[4] == "in":
+        if sublist[Year] == year and sublist[InorOut] == "in":
             counter_in += 1
-            dic_in.update({counter_in:sublist[5]})
+            dic_in.update({counter_in:sublist[Amount]})
 
-        elif sublist[3] == year and sublist[4] == "out":
+        elif sublist[Year] == year and sublist[InorOut] == "out":
             counter_out += 1
-            dic_out.update({counter_out:sublist[5]})
+            dic_out.update({counter_out:sublist[Amount]})
 
 
     for plusz in dic_in.keys():
