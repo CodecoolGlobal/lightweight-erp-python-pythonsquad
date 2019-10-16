@@ -129,13 +129,22 @@ def update(table, id_):
     userinput_man = ui.get_inputs("Manufacturer: ", "")
     userinput_price = ui.get_inputs("Price: ", "")
     userinput_stock = ui.get_inputs("In Stock: ", "")
+   
+   
+   
+   ID=0
+   TITLE=1
+   MAN=2
+   PRICE=3
+   STOCK=4
+   
     for sublist in table:
         if id_ in sublist:
-            sublist[0] = common.generate_random(table)
-            sublist[1] = userinput_title
-            sublist[2] = userinput_man
-            sublist[3] = userinput_price
-            sublist[4] = userinput_stock
+            sublist[ID] = common.generate_random(table)
+            sublist[TITLE] = userinput_title
+            sublist[MAN] = userinput_man
+            sublist[PRICE] = userinput_price
+            sublist[STOCK] = userinput_stock
     return table
 
 
@@ -154,12 +163,16 @@ def get_counts_by_manufacturers(table):
     """
 
     # your code
+   
+
+   MAN=2
+   
     dic = {}
     for sublist in table:
-        if sublist[2] not in dic:
-            dic.update({sublist[2]:1})
-        elif sublist[2] in dic:
-            dic[sublist[2]] += 1
+        if sublist[MAN] not in dic:
+            dic.update({sublist[MAN]:1})
+        elif sublist[MAN] in dic:
+            dic[sublist[MAN]] += 1
     return dic
 
 def get_average_by_manufacturer(table, manufacturer):
@@ -175,11 +188,15 @@ def get_average_by_manufacturer(table, manufacturer):
     """
 
     # your code
+
+   MAN=2
+   STOCK=4
+   
     counter = 0
     listofstock=[]
     for sublist in table:
-        if sublist[2] == manufacturer:
-            listofstock.append(int(sublist[4]))
+        if sublist[MAN] == manufacturer:
+            listofstock.append(int(sublist[STOCK]))
     result = common.avg_of_list(listofstock)
     return result
 
