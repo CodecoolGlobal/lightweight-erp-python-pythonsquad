@@ -1,5 +1,4 @@
 """ Sales module
-
 Data table structure:
     * id (string): Unique and random generated identifier
         at least 2 special characters (except: ';'), 2 number, 2 lower and 2 upper case letters)
@@ -18,13 +17,12 @@ import data_manager
 # common module
 import common
 
-def start_module():
 
+def start_module():
     """
     Starts this module and displays its menu.
      * User can access default special features from here.
      * User can go back to main menu from here.
-
     Returns:
         None
     """
@@ -57,17 +55,17 @@ def start_module():
             today = ui.get_inputs("Enter the second day you want to update: ", "")
             toyear = ui.get_inputs("Enter the second year you want to update: ", "")
 
-            ui.print_result(str(get_items_sold_between(table,frommonth,fromday,fromyear,tomonth,today,toyear)), "")
+            ui.print_result(str(get_items_sold_between(table, frommonth, fromday, fromyear, tomonth, today, toyear)),
+                            "")
         elif option == "0":
             break
+
 
 def show_table(table):
     """
     Display a table
-
     Args:
         table (list): list of lists to be displayed.
-
     Returns:
         None
     """
@@ -77,13 +75,12 @@ def show_table(table):
     ui.print_table(table, headers)
     ui.get_inputs("Press Enter to to advance!", "")
 
+
 def add(table):
     """
     Asks user for input and adds it into the table.
-
     Args:
         table (list): table to add new record to
-
     Returns:
         list: Table with a new record
     """
@@ -102,11 +99,9 @@ def add(table):
 def remove(table, id_):
     """
     Remove a record with a given id from the table.
-
     Args:
         table (list): table to remove a record from
         id_ (str): id of a record to be removed
-
     Returns:
         list: Table without specified record.
     """
@@ -119,15 +114,12 @@ def remove(table, id_):
     return table
 
 
-
 def update(table, id_):
     """
     Updates specified record in the table. Ask users for new data.
-
     Args:
         table (list): list in which record should be updated
         id_ (str): id of a record to update
-
     Returns:
         list: table with updated record
     """
@@ -138,16 +130,14 @@ def update(table, id_):
     userinput_month = ui.get_inputs("Month: ", "")
     userinput_day = ui.get_inputs("Day: ", "")
     userinput_year = ui.get_inputs("Year: ", "")
-      
-    ID=0
-    TITLE=1
-    PRICE=2
-    MONTH=3
-    DAY=4
-    YEAR=5
-      
-      
-     
+
+    ID = 0
+    TITLE = 1
+    PRICE = 2
+    MONTH = 3
+    DAY = 4
+    YEAR = 5
+
     for sublist in table:
         if id_ in sublist:
             sublist[ID] = common.generate_random(table)
@@ -166,22 +156,20 @@ def get_lowest_price_item_id(table):
     """
     Question: What is the id of the item that was sold for the lowest price?
     if there are more than one item at the lowest price, return the last item by alphabetical order of the title
-
     Args:
         table (list): data table to work on
-
     Returns:
          string: id
     """
-    ID=0
-    PRICE=2
+    ID = 0
+    PRICE = 2
     # your code
-    listofprices=[]
-    result =[]
+    listofprices = []
+    result = []
     for sublist in table:
         listofprices.append(int(sublist[PRICE]))
 
-    min=999999999999999999
+    min = 999999999999999999
     for number in listofprices:
         if min > number:
             min = number
@@ -194,7 +182,6 @@ def get_lowest_price_item_id(table):
 def get_items_sold_between(table, month_from, day_from, year_from, month_to, day_to, year_to):
     """
     Question: Which items are sold between two given dates? (from_date < sale_date < to_date)
-
     Args:
         table (list): data table to work on
         month_from (int)
@@ -203,7 +190,6 @@ def get_items_sold_between(table, month_from, day_from, year_from, month_to, day
         month_to (int)
         day_to (int)
         year_to (int)
-
     Returns:
         list: list of lists (the filtered table)
     """
@@ -211,15 +197,15 @@ def get_items_sold_between(table, month_from, day_from, year_from, month_to, day
     # your code
 
     # vH34Ju#&:ID-0   AudioSurf:Title-1  23:Price-2   6:Month-3   2:Day-4   2016:Year-5
-      
-    ID=0
-    TITLE=1
-    PRICE=2
-    MONTH=3
-    DAY=4
-    YEAR=5
 
-    result=[]
+    ID = 0
+    TITLE = 1
+    PRICE = 2
+    MONTH = 3
+    DAY = 4
+    YEAR = 5
+
+    result = []
     day_from = int(day_from)
     month_from = int(month_from) * 30
     year_from = int(year_from) * 365
@@ -228,14 +214,13 @@ def get_items_sold_between(table, month_from, day_from, year_from, month_to, day
     month_to = int(month_to) * 30
     year_to = int(year_to) * 365
     result_to = day_to + month_to + year_to
+
     for sublist in table:
-
-        x = int(sublist[DAY])+(int(sublist[MONTH])*30)+(int(sublist[YEAR])*365)
-        if x >= int(result_from) and x <= int(result_to):
-            result.append(sublist[TITLE])
+        x = int(sublist[DAY]) + (int(sublist[MONTH]) * 30) + (int(sublist[YEAR]) * 365)
+        if x > int(result_from) and x < int(result_to):
+            sublist[DAY] = int(sublist[DAY])
+            sublist[MONTH] = int(sublist[MONTH])
+            sublist[YEAR] = int(sublist[YEAR])
+            sublist[PRICE] = int(sublist[PRICE])
+            result.append(sublist)
     return result
-
-
-
-
-
