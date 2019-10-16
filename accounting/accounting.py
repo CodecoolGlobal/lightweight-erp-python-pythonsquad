@@ -212,11 +212,9 @@ def which_year_max(table):
 def avg_amount(table, year):
     """
     Question: What is the average (per item) profit in a given year? [(profit)/(items count)]
-
     Args:
         table (list): data table to work on
         year (number)
-
     Returns:
         number
     """
@@ -224,35 +222,41 @@ def avg_amount(table, year):
     # your code
     listofitems = []
 
-    dic_in={}
-    dic_out={}
+    dic_in = {}
+    dic_out = {}
     counter_in = 1
     counter_out = 1
-      
-    ID = 0
-    MONTH=1
-    DAY=2
-    YEAR=3
-    TYPE=4
-    AMOUNT=5
+
+
+    YEAR = 3
+    TYPE = 4
+    AMOUNT = 5
+
     for sublist in table:
         if sublist[YEAR] == year and sublist[TYPE] == "in":
             counter_in += 1
-            dic_in.update({counter_in:sublist[AMOUNT]})
+            dic_in.update({counter_in: sublist[AMOUNT]})
 
         elif sublist[YEAR] == year and sublist[TYPE] == "out":
             counter_out += 1
-            dic_out.update({counter_out:sublist[AMOUNT]})
+            dic_out.update({counter_out: sublist[AMOUNT]})
 
+    listofvalues_plusminus=[]
+    listofvalues_minus =[]
 
-    for plusz in dic_in.keys():
-        for minusz in dic_out.values():
-            result = (int(plusz) - int(minusz))
-            listofitems.append(result)
+    for plusz in dic_in.values():
+        listofvalues_plusminus.append(int(plusz))
 
-    num = 0
-    for items in listofitems:
-        num += items
-    result_new = num / len(dic_in.keys())
+    for minusz in dic_out.values():
+        minusnegative = int(minusz) - int(minusz) - int(minusz)
+        listofvalues_minus.append(minusz)
+        listofvalues_plusminus.append(minusnegative)
+
+    print(listofvalues_plusminus)
+    number = common.sum_of_list(listofvalues_plusminus)
+    print(number)
+    print("/")
+    print(len(listofvalues_plusminus))
+    result_new = number / len(listofvalues_plusminus)
     return result_new
 
