@@ -220,14 +220,11 @@ def avg_amount(table, year):
     """
 
     # your code
-    listofitems = []
-
     dic_in = {}
     dic_out = {}
     counter_in = 1
     counter_out = 1
-
-
+   
     YEAR = 3
     TYPE = 4
     AMOUNT = 5
@@ -242,21 +239,16 @@ def avg_amount(table, year):
             dic_out.update({counter_out: sublist[AMOUNT]})
 
     listofvalues_plusminus=[]
-    listofvalues_minus =[]
 
     for plusz in dic_in.values():
         listofvalues_plusminus.append(int(plusz))
 
     for minusz in dic_out.values():
         minusnegative = int(minusz) - int(minusz) - int(minusz)
-        listofvalues_minus.append(minusz)
         listofvalues_plusminus.append(minusnegative)
-
-    print(listofvalues_plusminus)
+      
     number = common.sum_of_list(listofvalues_plusminus)
-    print(number)
-    print("/")
-    print(len(listofvalues_plusminus))
+ 
     result_new = number / len(listofvalues_plusminus)
     return result_new
 
