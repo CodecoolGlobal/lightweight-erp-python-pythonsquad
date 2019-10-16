@@ -166,9 +166,11 @@ def get_available_items(table, year):
     DURABILITY_COL=4
     YEAR_COL=3
     ITEM_COL=1
+    ID_COL=0
+    MANUFACTURER_COL=2
     for i in range(len(table)):
         if int(table[i][DURABILITY_COL])+int(table[i][YEAR_COL])>=int(year) and int(year)>=int(table[i][YEAR_COL]):
-            available_items.append(table[i])
+            available_items.append([table[i][ID_COL],table[i][ITEM_COL],table[i][MANUFACTURER_COL],int(table[i][YEAR_COL]),int(table[i][DURABILITY_COL])])
 
     return available_items
 
