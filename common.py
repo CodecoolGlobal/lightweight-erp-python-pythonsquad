@@ -40,15 +40,20 @@ def generate_random(table):
 
         number_one = random.randint(0,9)
         number_two = random.randint(0, 9)
+        
+        FIRST_LIST=0
+        SECOND_LIST=1
+        THIRD_LIST=2
+        FOURTH_LIST=3
 
-        l.append(char[0][lower_one])
-        l.append(char[1][upper_one])
-        l.append(str(char[2][number_one]))
-        l.append(str(char[2][number_two]))
-        l.append(char[1][upper_two])
-        l.append(char[0][lower_two])
-        l.append(char[3][special_one])
-        l.append(char[3][special_two])
+        l.append(char[FIRST_LIST][lower_one])
+        l.append(char[SECOND_LIST][upper_one])
+        l.append(str(char[THIRD_LIST][number_one]))
+        l.append(str(char[THIRD_LIST][number_two]))
+        l.append(char[SECOND_LIST][upper_two])
+        l.append(char[FIRST_LIST][lower_two])
+        l.append(char[FOURTH_LIST][special_one])
+        l.append(char[FOURTH_LIST][special_two])
         generated = "".join(l)
         if generated in table:
             continue
