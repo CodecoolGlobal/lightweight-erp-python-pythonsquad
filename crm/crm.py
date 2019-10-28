@@ -219,6 +219,13 @@ def get_name_by_id(id):
     """
 
     # your code
+    ID=0
+    TITLE=1
+    table=data_manager.get_table_from_file("crm.csv")
+    for sublist in table:
+        if sublist[ID]==id:
+            return sublist[TITLE]
+    return None
 
 
 
@@ -235,3 +242,10 @@ def get_name_by_id_from_table(table, id):
     """
 
     # your code
+    ID=0
+    TITLE=1
+
+    for i in range(len(table)):
+        if table[i][ID]==id:
+            return table[i][TITLE]
+    return None
