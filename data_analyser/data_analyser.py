@@ -97,20 +97,22 @@ def get_the_buyer_id_spent_most_and_the_money_spent():
     FIRST = 0
     PRICE = 1
     cmr_price = []
+    list_of_prices = []
     customer_sales = sales.get_all_sales_ids_for_customer_ids()
 
     for key, value in customer_sales.items():
-        prices.append((key, sales.get_the_sum_of_prices(value)))
+        cmr_price.append((key, sales.get_the_sum_of_prices(value)))
 
     maxnum = cmr_price[FIRST][PRICE]
     SECOND=1
-
-    for price in cmr_price:
-        if price[SECOND] > maxnum:
-           maxnum = price[SECOND]
-
-    for cmr in cmr_price:
-        if cmr[SECOND] == maxnum:
+    
+    for tuple in cmr_price:
+        list_of_prices.append(tuple[SECOND])
+        
+    maxnum = max(list_of_prices)
+    
+    for cmr in prices:
+        if cmr [SECOND] == maxnum:
             return cmr
 
 
