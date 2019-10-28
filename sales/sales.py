@@ -241,7 +241,14 @@ def get_title_by_id(id):
     """
 
     # your code
+    ID = 0
+    TITLE = 1
 
+    table = data_manager.get_table_from_file("sales.csv")
+    for sublist in table:
+        if sublist[ID] == id:
+            return sublist[TITLE]
+    return None
 
 def get_title_by_id_from_table(table, id):
 
@@ -257,7 +264,13 @@ def get_title_by_id_from_table(table, id):
     """
 
     # your code
+    ID = 0
+    TITLE = 1
 
+    for i in range(len(table)):
+        if table[i][ID] == id:
+            return table[i][TITLE]
+    return None
 
 def get_item_id_sold_last():
     """
@@ -269,7 +282,29 @@ def get_item_id_sold_last():
     """
 
     # your code
+    MONTH = 3
+    DAY = 4
+    YEAR = 5
 
+    counter = 0
+    day_converted = []
+
+    table = data_manager.get_table_from_file("sales.csv")
+    DAYS = 0
+
+    for sublist in table:
+        counter +=1
+        converted = counter, int(sublist[DAY]) + (int(sublist[MONTH]) * 30) + (int(sublist[YEAR]) * 365)
+        day_converted.append(converted)
+
+    maxday = (max(day_converted[DAYS]))
+
+    for tuple in day_converted:
+        if maxday in tuple:
+            id_of_item = tuple[DAYS]
+        for sublist in table:
+            return sublist[id_of_item-1]
+         
 
 def get_item_id_sold_last_from_table(table):
     """
@@ -283,7 +318,27 @@ def get_item_id_sold_last_from_table(table):
     """
 
     # your code
+    MONTH = 3
+    DAY = 4
+    YEAR = 5
 
+    counter = 0
+    day_converted = []
+
+    DAYS = 0
+
+    for sublist in table:
+        counter +=1
+        converted = counter, int(sublist[DAY]) + (int(sublist[MONTH]) * 30) + (int(sublist[YEAR]) * 365)
+        day_converted.append(converted)
+
+    maxday = (max(day_converted[DAYS]))
+
+    for tuple in day_converted:
+        if maxday in tuple:
+            id_of_item = tuple[DAYS]
+        for sublist in table:
+            return sublist[id_of_item-1]
 
 def get_item_title_sold_last_from_table(table):
     """
@@ -297,7 +352,27 @@ def get_item_title_sold_last_from_table(table):
     """
 
     # your code
+    MONTH = 3
+    DAY = 4
+    YEAR = 5
+    TITLE=1
 
+    counter = 0
+    day_converted = []
+
+    DAYS = 0
+
+    for sublist in table:
+        converted = int(sublist[DAY]) + (int(sublist[MONTH]) * 30) + (int(sublist[YEAR]) * 365)
+        day_converted.append(converted)
+
+    maxday = (max(day_converted))
+    for i in range(len(day_converted)):
+        if day_converted[i]==maxday:
+            break
+        counter+=1
+
+    return table[counter][TITLE]
 
 def get_the_sum_of_prices(item_ids):
     """
@@ -312,7 +387,19 @@ def get_the_sum_of_prices(item_ids):
     """
 
     # your code
+    PRICE = 2
+    ID = 0
+    list_of_prices=[]
+    table = data_manager.get_table_from_file("sales.csv")
 
+    for i in range(len(item_ids)):
+        for j in range(len(table)):
+            if item_ids[i] == table[j][ID]:
+                list_of_prices.append(int(table[j][PRICE]))
+    sumnum = 0
+    for prices in list_of_prices:
+        sumnum += prices
+    return sumnum
 
 def get_the_sum_of_prices_from_table(table, item_ids):
     """
@@ -327,7 +414,18 @@ def get_the_sum_of_prices_from_table(table, item_ids):
     """
 
     # your code
+    PRICE = 2
+    ID = 0
+    list_of_prices=[]
 
+    for i in range(len(item_ids)):
+        for j in range(len(table)):
+            if item_ids[i] == table[j][ID]:
+                list_of_prices.append(int(table[j][PRICE]))
+    sumnum = 0
+    for prices in list_of_prices:
+        sumnum += prices
+    return sumnum
 
 def get_customer_id_by_sale_id(sale_id):
     """
@@ -342,7 +440,15 @@ def get_customer_id_by_sale_id(sale_id):
     """
 
     # your code
+    table = data_manager.get_table_from_file("sales.csv")
 
+    ID = 0
+    CUSTOMER_ID = 6
+
+    for sublist in table:
+        if sublist[ID] == sale_id:
+            return sublist[CUSTOMER_ID]
+    return None
 
 def get_customer_id_by_sale_id_from_table(table, sale_id):
     """
