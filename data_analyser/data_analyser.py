@@ -66,20 +66,21 @@ def get_the_buyer_name_spent_most_and_the_money_spent():
     """
 
     # your code
-    all_IDs = sales.get_all_sales_ids_for_customer_ids()
-    ID=1
-    FIRST=0
+    FIRST = 0
+    ID = 1
     cmr_price = []
+    list_of_prices=[]
+    all_IDs = sales.get_all_sales_ids_for_customer_ids()
     
     for key, value in all_IDs.items():
         cmr_price.append((crm.get_name_by_id(key), sales.get_the_sum_of_prices(value)))
 
     maxnum = cmr_price[FIRST][ID]
 
-    for price in cmr_price:
-        if price[ID] > maxnum:
-            maxnum = price[ID]
-            
+    for tuple in cmr_price:
+        list_of_prices.append(tuple[ID])
+    maxnum = max(list_of_prices)
+
     for cmr in cmr_price:
         if cmr[ID] == maxnum:
             return cmr
