@@ -56,8 +56,7 @@ def start_module():
             today = ui.get_inputs("Enter the second day you want to update: ", "")
             toyear = ui.get_inputs("Enter the second year you want to update: ", "")
 
-            ui.print_result(str(get_items_sold_between(table, frommonth, fromday, fromyear, tomonth, today, toyear)),
-                            "")
+            ui.print_result(str(get_items_sold_between(table, frommonth, fromday, fromyear, tomonth, today, toyear)),"")
         elif option == "0":
             break
 
@@ -72,7 +71,7 @@ def show_table(table):
     """
 
     # your code
-    headers = ["ID", "Title", "Price", "Month", "Day", "Year"]
+    headers = ["ID", "Title", "Price", "Month", "Day", "Year","Customer ID"]
     ui.print_table(table, headers)
     ui.get_inputs("Press Enter to to advance!", "")
 
@@ -250,6 +249,7 @@ def get_title_by_id(id):
             return sublist[TITLE]
     return None
 
+
 def get_title_by_id_from_table(table, id):
 
     """
@@ -262,15 +262,14 @@ def get_title_by_id_from_table(table, id):
     Returns:
         str: the title of the item
     """
-
-    # your code
-    ID = 0
-    TITLE = 1
+    ID=0
+    TITLE=1
 
     for i in range(len(table)):
-        if table[i][ID] == id:
+        if table[i][ID]==id:
             return table[i][TITLE]
     return None
+
 
 def get_item_id_sold_last():
     """
@@ -304,7 +303,7 @@ def get_item_id_sold_last():
             id_of_item = tuple[DAYS]
         for sublist in table:
             return sublist[id_of_item-1]
-         
+
 
 def get_item_id_sold_last_from_table(table):
     """
@@ -340,6 +339,7 @@ def get_item_id_sold_last_from_table(table):
         for sublist in table:
             return sublist[id_of_item-1]
 
+
 def get_item_title_sold_last_from_table(table):
     """
     Returns the _title_ of the item that was sold most recently.
@@ -373,6 +373,7 @@ def get_item_title_sold_last_from_table(table):
         counter+=1
 
     return table[counter][TITLE]
+
 
 def get_the_sum_of_prices(item_ids):
     """
@@ -427,6 +428,7 @@ def get_the_sum_of_prices_from_table(table, item_ids):
         sumnum += prices
     return sumnum
 
+
 def get_customer_id_by_sale_id(sale_id):
     """
     Reads the sales table with the help of the data_manager module.
@@ -450,6 +452,7 @@ def get_customer_id_by_sale_id(sale_id):
             return sublist[CUSTOMER_ID]
     return None
 
+
 def get_customer_id_by_sale_id_from_table(table, sale_id):
     """
     Returns the customer_id that belongs to the given sale_id
@@ -461,8 +464,13 @@ def get_customer_id_by_sale_id_from_table(table, sale_id):
     Returns:
         str: customer_id that belongs to the given sale id
     """
-
+    SALEID=0
+    CUSTOMERID=6
     # your code
+    for i in range(len(table)):
+        if table[i][SALEID]==sale_id:
+            return table[i][CUSTOMERID]
+    return None
 
 
 def get_all_customer_ids():
@@ -474,6 +482,16 @@ def get_all_customer_ids():
     """
 
     # your code
+    CUSTOMERID=6
+    table = data_manager.get_table_from_file("sales/sales.csv")
+    customer_ids=""
+    for i in range(len(table)):
+        if i==(len(table))-1:
+            customer_ids+=table[i][CUSTOMERID]
+        else :
+            customer_ids+=table[i][CUSTOMERID]+" "
+    return customer_ids
+
 
 
 def get_all_customer_ids_from_table(table):
@@ -487,7 +505,14 @@ def get_all_customer_ids_from_table(table):
     """
 
     # your code
-
+    CUSTOMERID=6
+    customer_ids=""
+    for i in range(len(table)):
+        if i==(len(table))-1:
+            customer_ids+=table[i][CUSTOMERID]
+        else :
+            customer_ids+=table[i][CUSTOMERID]+" "
+    return customer_ids
 
 def get_all_sales_ids_for_customer_ids():
     """
@@ -503,6 +528,17 @@ def get_all_sales_ids_for_customer_ids():
     """
 
     # your code
+    SALEID=0
+    CUSTOMERID=6
+    table = data_manager.get_table_from_file("sales/sales.csv")
+    id_dict={}
+    for i in range(len(table)):
+        if table[i][CUSTOMERID] in id_dict.keys():
+            id_dict[table[i][CUSTOMERID]].append(table[i][SALEID])
+        else:
+            id_dict.update({table[i][CUSTOMERID]:[table[i][SALEID]]})
+    return id_dict
+
 
 
 def get_all_sales_ids_for_customer_ids_from_table(table):
@@ -519,6 +555,15 @@ def get_all_sales_ids_for_customer_ids_from_table(table):
     """
 
     # your code
+    SALEID=0
+    CUSTOMERID=6
+    id_dict={}
+    for i in range(len(table)):
+        if table[i][CUSTOMERID] in id_dict.keys():
+            id_dict[table[i][CUSTOMERID]].append(table[i][SALEID])
+        else:
+            id_dict.update({table[i][CUSTOMERID]:[table[i][SALEID]]})
+    return id_dict
 
 
 def get_num_of_sales_per_customer_ids():
@@ -532,6 +577,17 @@ def get_num_of_sales_per_customer_ids():
     """
 
     # your code
+    SALEID=0
+    CUSTOMERID=6
+    sum_dict={}
+    table = data_manager.get_table_from_file("sales/sales.csv")
+    for i in range(len(table)):
+        if table[i][CUSTOMERID] in sum_dict.keys():
+            sum_dict[table[i][CUSTOMERID]]+=1
+        else :
+            sum_dict.update({table[i][CUSTOMERID]:1})
+    return sum_dict
+
 
 
 def get_num_of_sales_per_customer_ids_from_table(table):
@@ -546,3 +602,12 @@ def get_num_of_sales_per_customer_ids_from_table(table):
     """
 
     # your code
+    SALEID=0
+    CUSTOMERID=6
+    sum_dict={}
+    for i in range(len(table)):
+        if table[i][CUSTOMERID] in sum_dict.keys():
+            sum_dict[table[i][CUSTOMERID]]+=1
+        else :
+            sum_dict.update({table[i][CUSTOMERID]:1})
+    return sum_dict
