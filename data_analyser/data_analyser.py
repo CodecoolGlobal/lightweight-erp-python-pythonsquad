@@ -112,7 +112,7 @@ def get_the_buyer_id_spent_most_and_the_money_spent():
         
     maxnum = max(list_of_prices)
     
-    for cmr in prices:
+    for cmr in cmr_price:
         if cmr[PRICE] == maxnum:
             return cmr
 
