@@ -243,7 +243,7 @@ def get_title_by_id(id):
     ID = 0
     TITLE = 1
 
-    table = data_manager.get_table_from_file("sales.csv")
+    table = data_manager.get_table_from_file("sales/sales.csv")
     for sublist in table:
         if sublist[ID] == id:
             return sublist[TITLE]
@@ -288,7 +288,7 @@ def get_item_id_sold_last():
     counter = 0
     day_converted = []
 
-    table = data_manager.get_table_from_file("sales.csv")
+    table = data_manager.get_table_from_file("sales/sales.csv")
     DAYS = 0
 
     for sublist in table:
@@ -391,7 +391,7 @@ def get_the_sum_of_prices(item_ids):
     PRICE = 2
     ID = 0
     list_of_prices=[]
-    table = data_manager.get_table_from_file("sales.csv")
+    table = data_manager.get_table_from_file("sales/sales.csv")
 
     for i in range(len(item_ids)):
         for j in range(len(table)):
@@ -442,7 +442,7 @@ def get_customer_id_by_sale_id(sale_id):
     """
 
     # your code
-    table = data_manager.get_table_from_file("sales.csv")
+    table = data_manager.get_table_from_file("sales/sales.csv")
 
     ID = 0
     CUSTOMER_ID = 6
@@ -482,12 +482,13 @@ def get_all_customer_ids():
     """
 
     # your code
-    table = data_manager.get_table_from_file("sales/sales.csv")
-    ID = 6
-    set1 = set()
+    ID=6
+    table=data_manager.get_table_from_file("sales/sales.csv")
+    set1=set()
     for sublist in table:
         set1.add(sublist[6])
     return set1
+    
 
 
 
@@ -502,11 +503,12 @@ def get_all_customer_ids_from_table(table):
     """
 
     # your code
-    ID = 6
-    set1 = set()
+    ID=6
+    set1=set()
     for sublist in table:
         set1.add(sublist[6])
     return set1
+    
 
 def get_all_sales_ids_for_customer_ids():
     """
