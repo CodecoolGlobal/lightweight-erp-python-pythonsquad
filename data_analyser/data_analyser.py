@@ -26,6 +26,26 @@ def start_module():
     """
 
     # your code
+    options=["Last buyer's name","Last buyer's ID","The most money spent with name","The most money spent with ID","The most frequent buyer's name","The most frequent buyer's ID"]
+    while True:
+        ui.print_menu("Data analyser",options,"Main menu")
+        inputs=ui.get_inputs("Please enter a number:","")
+        option = inputs[0]
+        if option=="1":
+            ui.print_result(get_the_last_buyer_name(),"")
+        elif option=="2":
+            ui.print_result(get_the_last_buyer_id(),"")
+        elif option=="3":
+            ui.print_result(get_the_buyer_name_spent_most_and_the_money_spent(),"")
+        elif option=="4":
+            ui.print_result(get_the_buyer_id_spent_most_and_the_money_spent(),"")
+        elif option=="5":
+            ui.print_result(get_the_most_frequent_buyers_names(num=1),"")
+        elif option=="6":
+            ui.print_result(get_the_most_frequent_buyers_ids(num=1),"")
+        elif option=="0":
+            break
+
 
     pass
 
@@ -44,6 +64,7 @@ def get_the_last_buyer_name():
     name = crm.get_name_by_id(customer_id)
     return name
 
+
 def get_the_last_buyer_id():
     """
     Returns the customer _id_ of the customer made sale last.
@@ -56,6 +77,7 @@ def get_the_last_buyer_id():
     last_sold_item_id = sales.get_item_id_sold_last()
     customer_id = sales.get_customer_id_by_sale_id(last_sold_item_id)
     return customer_id
+
 
 def get_the_buyer_name_spent_most_and_the_money_spent():
     """
@@ -84,7 +106,6 @@ def get_the_buyer_name_spent_most_and_the_money_spent():
     for cmr in cmr_price:
         if cmr[ID] == maxnum:
             return cmr
-
 
 def get_the_buyer_id_spent_most_and_the_money_spent():
     """
@@ -117,6 +138,7 @@ def get_the_buyer_id_spent_most_and_the_money_spent():
             return cmr
 
 
+
 def get_the_most_frequent_buyers_names(num=1):
     """
     Returns 'num' number of buyers (more precisely: the customer's name) who bought most frequently in an
@@ -131,7 +153,21 @@ def get_the_most_frequent_buyers_names(num=1):
     """
 
     # your code
- 
+    sales_dict=sales.get_all_sales_ids_for_customer_ids()
+    sales_keys=[]
+    sales_names=[]
+    for keys in sales_dict.keys():
+        sales_keys.append(keys)
+    for key in sales_keys:
+        sales_names.append(crm.get_name_by_id(key))
+    buyer_names=[]
+    #for i in range (len(sales_dict.values())):
+    for i in range(num):
+        buyer_names.append((sales_names[i],len(sales_dict[sales_keys[i]])))
+    return buyer_names
+    
+
+
 
 def get_the_most_frequent_buyers_ids(num=1):
     """
@@ -147,3 +183,12 @@ def get_the_most_frequent_buyers_ids(num=1):
     """
 
     # your code
+    sales_dict=sales.get_all_sales_ids_for_customer_ids()
+    sales_keys=[]
+    for keys in sales_dict.keys():
+        sales_keys.append(keys)
+    buyer_ids=[]
+    #for i in range (len(sales_dict.values())):
+    for i in range(num):
+        buyer_ids.append((sales_keys[i],len(sales_dict[sales_keys[i]])))
+    return buyer_ids
