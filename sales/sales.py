@@ -482,15 +482,12 @@ def get_all_customer_ids():
     """
 
     # your code
-    CUSTOMERID=6
     table = data_manager.get_table_from_file("sales/sales.csv")
-    customer_ids=""
-    for i in range(len(table)):
-        if i==(len(table))-1:
-            customer_ids+=table[i][CUSTOMERID]
-        else :
-            customer_ids+=table[i][CUSTOMERID]+" "
-    return customer_ids
+    ID = 6
+    set1 = set()
+    for sublist in table:
+        set1.add(sublist[6])
+    return set1
 
 
 
@@ -505,14 +502,11 @@ def get_all_customer_ids_from_table(table):
     """
 
     # your code
-    CUSTOMERID=6
-    customer_ids=""
-    for i in range(len(table)):
-        if i==(len(table))-1:
-            customer_ids+=table[i][CUSTOMERID]
-        else :
-            customer_ids+=table[i][CUSTOMERID]+" "
-    return customer_ids
+    ID = 6
+    set1 = set()
+    for sublist in table:
+        set1.add(sublist[6])
+    return set1
 
 def get_all_sales_ids_for_customer_ids():
     """
